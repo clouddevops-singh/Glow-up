@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100-Day Face & Skin Personal Upgrade Dashboard</title>
+    <link rel="stylesheet" href="styles.css?v=1.1">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SheetJS for Excel Reading and Writing -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- HEADER HUD -->
+        <header>
+            <div class="brand-section">
+                <span class="brand-subtitle">Systemic Biohacking</span>
+                <h1 class="brand-title">100-Day Upgrade Engine</h1>
+            </div>
+            
+            <div class="progress-hud">
+                <div class="hud-stat">
+                    <span class="hud-stat-value" id="hud-days-completed">0/100</span>
+                    <span class="hud-stat-label">Progress</span>
+                </div>
+                <div class="hud-stat">
+                    <span class="hud-stat-value" id="hud-streak">0 days</span>
+                    <span class="hud-stat-label">Streak</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-labels">
+                        <span id="hud-current-phase">Phase 1: Foundation</span>
+                        <span id="hud-percent-value">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-bar-fill" id="hud-progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- TAB NAVIGATION -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-tab="dashboard-tab">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+                Dashboard Grid
+            </button>
+            <button class="tab-btn" data-tab="tracker-tab">
+                <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                Daily Tracker
+            </button>
+            <button class="tab-btn" data-tab="inventory-tab">
+                <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Shopping & Tools
+            </button>
+            <button class="tab-btn" data-tab="sync-tab">
+                <svg viewBox="0 0 24 24"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                Cloud & Excel Sync
+            </button>
+        </nav>
+
+        <!-- DASHBOARD TAB -->
+        <section id="dashboard-tab" class="tab-content active">
+            <div class="dashboard-grid">
+                <!-- 100 Day Grid Panel -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-calendar-days"></i> 100-Day Progress Grid</h2>
+                        <button class="panel-action-btn" id="btn-reset-dates"><i class="fa-solid fa-redo"></i> Reset Plan Date</button>
+                    </div>
+                    
+                    <div class="phases-timeline">
+                        <div class="phase-pill active" data-phase-filter="1">
+                            <span class="phase-pill-title">Phase 1: Foundation</span>
+                            <span class="phase-pill-range">Days 1 - 15</span>
+                        </div>
+                        <div class="phase-pill" data-phase-filter="2">
+                            <span class="phase-pill-title">Phase 2: Sharpening</span>
+                            <span class="phase-pill-range">Days 16 - 50</span>
+                        </div>
+                        <div class="phase-pill" data-phase-filter="3">
+                            <span class="phase-pill-title">Phase 3: Refinement</span>
+                            <span class="phase-pill-range">Days 51 - 100</span>
+                        </div>
+                    </div>
+
+                    <div class="grid-100" id="days-grid">
+                        <!-- Javascript generates 100 cells here -->
+                    </div>
+                </div>
+
+                <!-- The 100-Day Compound Effect Panel -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-wand-magic-sparkles"></i> The 100-Day Compound Effect</h2>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <div class="info-card" style="border-left: 4px solid var(--accent-purple); padding: 0.75rem 1rem;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem;">
+                                <strong>Days 1 - 15: The Purge & Acclimation</strong>
+                                <span class="badge-source own">Phase 1</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">Skin may feel slightly sensitive. A few small breakouts possible (retinoid pulling out hidden congestion). This is GOOD. Jawline looks sharper in the morning for 1-2 hours after ice dip.</p>
+                        </div>
+                        <div class="info-card" style="border-left: 4px solid var(--accent-cyan); padding: 0.75rem 1rem;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem;">
+                                <strong>Days 16 - 30: The Clarity Phase</strong>
+                                <span class="badge-source buy">Phase 2</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">Dead surface tan begins lifting. Skin looks less "muddy." Morning jawline definition lasts longer. Gua Sha starts feeling natural.</p>
+                        </div>
+                        <div class="info-card" style="border-left: 4px solid var(--accent-cyan); padding: 0.75rem 1rem;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem;">
+                                <strong>Days 30 - 50: The Brightness Phase</strong>
+                                <span class="badge-source buy">Phase 2</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">Visible difference between face and body skin tone. Colleagues may ask if you're sleeping better. The perma-tan on forehead and cheeks is fading.</p>
+                        </div>
+                        <div class="info-card" style="border-left: 4px solid var(--accent-green); padding: 0.75rem 1rem;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem;">
+                                <strong>Days 50 - 80: The Sculpting Phase</strong>
+                                <span class="badge-source kitchen">Phase 3</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">Face looks visibly less puffy even without morning ice dip. Jawline evident in photos at rest. Collagen from retinoid begins firming skin.</p>
+                        </div>
+                        <div class="info-card" style="border-left: 4px solid var(--accent-green); padding: 0.75rem 1rem;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.25rem;">
+                                <strong>Days 80 - 100: The Engineer's Edge</strong>
+                                <span class="badge-source kitchen">Phase 3</span>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">Uniform, bright, clear skin tone. Defined jawline that doesn't disappear by evening. You haven't become "white"—you've become the sharpest, brightest version of YOUR skin.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info and Metrics Sidebar -->
+                <div class="flex-column-gap">
+                    <div class="panel">
+                        <h2 class="panel-title"><i class="fa-solid fa-chart-line"></i> Quick Stats</h2>
+                        <div class="stats-cards-row" style="grid-template-columns: 1fr 1fr;">
+                            <div class="stat-glow-card">
+                                <span class="stat-glow-num" id="stat-completed-days">0</span>
+                                <span class="stat-glow-label">Days Logged</span>
+                            </div>
+                            <div class="stat-glow-card">
+                                <span class="stat-glow-num" id="stat-overall-percent">0%</span>
+                                <span class="stat-glow-label">Percentage</span>
+                            </div>
+                            <div class="stat-glow-card">
+                                <span class="stat-glow-num" id="stat-active-streak">0</span>
+                                <span class="stat-glow-label">Active Streak</span>
+                            </div>
+                            <div class="stat-glow-card">
+                                <span class="stat-glow-num" id="stat-remaining-days">100</span>
+                                <span class="stat-glow-label">Days Left</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h2 class="panel-title"><i class="fa-solid fa-bullseye"></i> Current Phase Focus</h2>
+                        <div class="info-card">
+                            <h3 id="current-phase-focus-title">Phase 1: Foundation</h3>
+                            <p id="current-phase-focus-desc">Acquisition, Patch Testing & Skin Acclimation. Focus on clearing surface dullness, initiating collagen turnover, and establishing the AM/PM routines.</p>
+                        </div>
+                        <div class="info-card" style="background: rgba(0, 242, 254, 0.02); border-color: rgba(0, 242, 254, 0.1);">
+                            <h3><i class="fa-solid fa-lightbulb"></i> Today's Blueprint Rule</h3>
+                            <p id="today-blueprint-tip">Always do a patch test behind your ear before trying the Retinoid or AHA/BHA Red Peel. Gentle progress prevents post-inflammatory hyperpigmentation on sawla skin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRACKER TAB -->
+        <section id="tracker-tab" class="tab-content">
+            <div class="tracker-layout">
+                <!-- Checklist Panel -->
+                <div class="panel">
+                    <div class="day-header-banner">
+                        <div class="day-banner-info">
+                            <h2 id="tracker-selected-day">Day 1</h2>
+                            <p id="tracker-selected-phase">Phase 1: Foundation</p>
+                        </div>
+                        <div class="day-nav-buttons">
+                            <button class="day-nav-btn" id="btn-prev-day"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="day-nav-btn" id="btn-jump-today" title="Jump to Current Calendar Day"><i class="fa-solid fa-calendar-day"></i></button>
+                            <button class="day-nav-btn" id="btn-next-day"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="panel-header" style="border:none; padding-bottom:0;">
+                        <h3 class="panel-title"><i class="fa-solid fa-list-check"></i> Routine Checklist</h3>
+                        <span class="hud-stat-label" id="tracker-completion-ratio">0/7 Completed</span>
+                    </div>
+
+                    <div class="checklist-container" id="tracker-checklist">
+                        <!-- Dynamic list of routine steps -->
+                    </div>
+                </div>
+
+                <!-- Explanation & Note Sidebar -->
+                <div class="flex-column-gap">
+                    <div class="panel">
+                        <h2 class="panel-title"><i class="fa-solid fa-clock"></i> Daily Schedule Reference</h2>
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left;">
+                                <thead>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                        <th style="padding: 0.5rem 0.25rem; color: var(--text-secondary);">Time</th>
+                                        <th style="padding: 0.5rem 0.25rem; color: var(--text-secondary);">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.02);">
+                                        <td style="padding: 0.5rem 0.25rem; font-weight: 600; color: var(--accent-cyan);">6:30 AM</td>
+                                        <td style="padding: 0.5rem 0.25rem; color: var(--text-secondary);">Lemon + Honey + Warm Water</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.02);">
+                                        <td style="padding: 0.5rem 0.25rem; font-weight: 600; color: var(--accent-cyan);">7:00 AM</td>
+                                        <td style="padding: 0.5rem 0.25rem; color: var(--text-secondary);">Ice Dip + Rice Water + Gulab Jal Toner</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.02);">
+                                        <td style="padding: 0.5rem 0.25rem; font-weight: 600; color: var(--accent-purple);">7:20 AM</td>
+                                        <td style="padding: 0.5rem 0.25rem; color: var(--text-secondary);">Vitamin C Serum + Sunscreen <span style="font-size: 0.7rem; color: var(--accent-cyan); display:block;">(Post-Bath)</span></td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.02);">
+                                        <td style="padding: 0.5rem 0.25rem; font-weight: 600; color: var(--accent-green);">12:00 PM</td>
+                                        <td style="padding: 0.5rem 0.25rem; color: var(--text-secondary);">Reapply Sunscreen + Gum + Green Tea</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.02);">
+                                        <td style="padding: 0.5rem 0.25rem; font-weight: 600; color: var(--accent-green);">3:00 PM</td>
+                                        <td style="padding: 0.5rem 0.25rem; color: var(--text-secondary);">Reapply Sunscreen</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.02);">
+                                        <td style="padding: 0.5rem 0.25rem; font-weight: 600; color: var(--accent-purple);">Evening</td>
+                                        <td style="padding: 0.5rem 0.25rem; color: var(--text-secondary);">Double Cleanse</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 0.5rem 0.25rem; font-weight: 600; color: var(--accent-purple);">Night</td>
+                                        <td style="padding: 0.5rem 0.25rem; color: var(--text-secondary);">Treatment + Gua Sha + Moisturizer <span style="font-size: 0.7rem; color: var(--accent-purple); display:block;">(Day-Specific)</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h2 class="panel-title"><i class="fa-solid fa-dna"></i> Skin Mechanism (The "Why")</h2>
+                        <div class="detail-explanation-card">
+                            <h3 class="detail-explanation-title" id="detail-step-title">Select a step</h3>
+                            <p class="detail-explanation-text" id="detail-step-why">Click on any checklist step to view the scientific reason why this works and how it benefits your sawla skin tone or jawline definition.</p>
+                            <p class="item-product" id="detail-step-product" style="display: none;"></p>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h2 class="panel-title"><i class="fa-solid fa-pen-clip"></i> Day Logs & Notes</h2>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary);">Write down any skin changes, breakouts (purging), improvements, or issues you noticed today.</p>
+                        <textarea class="day-notes-textarea" id="tracker-day-notes" placeholder="Example: Retinoid applied, slight tingling. Drank 4L water. Gua Sha completed."></textarea>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <button class="action-btn" id="btn-save-day-log" style="flex: 1;"><i class="fa-solid fa-floppy-disk"></i> Save Day Progress</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INVENTORY TAB -->
+        <section id="inventory-tab" class="tab-content">
+            <div class="inventory-grid">
+                <!-- Inventory List Table -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-basket-shopping"></i> Upgrade Inventory Checklist</h2>
+                        <div class="inventory-filters">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="actives">Actives</button>
+                            <button class="filter-btn" data-filter="kitchen">Kitchen</button>
+                            <button class="filter-btn" data-filter="tools">Tools</button>
+                            <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+                        </div>
+                    </div>
+
+                    <div class="inventory-table-container">
+                        <table class="inventory-table">
+                            <thead>
+                                <tr>
+                                    <th width="40">Status</th>
+                                    <th>Item / Product</th>
+                                    <th>Type</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventory-table-body">
+                                <!-- Dynamic rows of items -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Procurement Summary Sidebar -->
+                <div class="flex-column-gap">
+                    <div class="panel">
+                        <h2 class="panel-title"><i class="fa-solid fa-clipboard-list"></i> Procurement Summary</h2>
+                        
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-labels">
+                                <span>Items Procured</span>
+                                <span id="budget-procured-ratio">0/25</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" id="budget-progress-fill" style="width: 0%; background: var(--accent-green);"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel" style="background: rgba(168, 85, 247, 0.02);">
+                        <h2 class="panel-title" style="color:var(--accent-purple);"><i class="fa-solid fa-circle-info"></i> Starter Guidance</h2>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">
+                            Bhai, you already have:
+                            <br><strong>Minimalist Vitamin C</strong> and your current <strong>Sunscreen</strong>. 
+                            <br><br>
+                            For **Month 1**, focus on obtaining the essential active skincare items and tools (face wash, retinoid, peeling mask, and Gua Sha). The remaining items can be acquired as you proceed into Month 2.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLOUD & EXCEL SYNC TAB -->
+        <section id="sync-tab" class="tab-content">
+            <div class="sync-flex">
+                <!-- Local Excel Sync -->
+                <div class="panel">
+                    <h2 class="panel-title"><i class="fa-solid fa-file-excel"></i> Local Excel Spreadsheet Sync</h2>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Import your progress tracking sheet or download a backup spreadsheet. You can open and edit this file offline in Microsoft Excel, Google Sheets, or Apple Numbers.</p>
+                    
+                    <div class="file-dropzone" id="excel-dropzone">
+                        <i class="fa-regular fa-file-excel file-dropzone-icon"></i>
+                        <strong>Drag & drop your Excel sheet here</strong>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Supports .xlsx, .xls, .csv files</span>
+                        <input type="file" id="excel-file-input" style="display: none;" accept=".xlsx, .xls, .csv">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                        <button class="secondary-btn" id="btn-export-excel"><i class="fa-solid fa-download"></i> Export Logs (.xlsx)</button>
+                        <button class="secondary-btn" id="btn-download-template"><i class="fa-solid fa-file-signature"></i> Get Template</button>
+                    </div>
+                </div>
+
+                <!-- Google Sheets Sync -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2 class="panel-title"><i class="fa-solid fa-cloud-arrow-up"></i> Google Sheets Cloud Sync</h2>
+                        <div class="sync-status disconnected" id="cloud-sync-status">
+                            <span class="sync-status-dot"></span>
+                            <span id="cloud-status-text">Disconnected</span>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 0.85rem; color: var(--text-secondary);">Directly read and write logs to your personal Google Sheet by deploying a small web proxy script. No complex credentials required.</p>
+                    
+                    <div class="form-group">
+                        <label for="input-script-url">Google Apps Script Web App URL</label>
+                        <input type="url" id="input-script-url" class="form-input" placeholder="https://script.google.com/macros/s/AKfycb.../exec">
+                    </div>
+
+                    <div style="display: flex; gap: 0.75rem;">
+                        <button class="action-btn" id="btn-cloud-pull" style="flex: 1;"><i class="fa-solid fa-cloud-arrow-down"></i> Pull Data</button>
+                        <button class="action-btn" id="btn-cloud-push" style="flex: 1;"><i class="fa-solid fa-cloud-arrow-up"></i> Push Data</button>
+                    </div>
+
+                    <div class="info-card" style="background: rgba(255, 255, 255, 0.02); margin-top: 0.5rem;">
+                        <h3 style="color:var(--accent-cyan);"><i class="fa-solid fa-list-numbered"></i> 3-Minute Cloud Setup Instruction</h3>
+                        <ul class="guide-list">
+                            <li>Create a new Google Sheet and name it <strong>100-Day Upgrade Log</strong>.</li>
+                            <li>Go to <strong>Extensions > Apps Script</strong>.</li>
+                            <li>Copy and paste the script code below into the editor, then save.</li>
+                            <li>Click <strong>Deploy > New Deployment</strong>. Choose <strong>Web App</strong>.</li>
+                            <li>Set "Execute as" to <strong>Me</strong> and "Who has access" to <strong>Anyone</strong>.</li>
+                            <li>Deploy, copy the Web App URL, and paste it into the input field above.</li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 0.25rem;">
+                        <label>Google Apps Script Code</label>
+                        <div class="code-block-container">
+                            <button class="copy-btn" id="btn-copy-code"><i class="fa-regular fa-copy"></i> Copy</button>
+                            <pre><code id="script-code-content">/* Loading... */</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- DAY DETAILS DIALOG / MODAL (FOR DAY GRID CLICKS) -->
+    <div class="modal-backdrop" id="day-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-day-title">Day 1 Details</h2>
+                <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="day-banner-info" style="background: rgba(168, 85, 247, 0.08); border-radius:12px; padding:0.8rem 1.2rem;">
+                    <p id="modal-day-phase" style="font-weight:700; color:var(--accent-purple);"></p>
+                    <span style="font-size:0.8rem; color:var(--text-secondary);" id="modal-day-date">Date: Not set</span>
+                </div>
+                
+                <h3 style="font-size: 1.1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 0.5rem; margin-top: 0.5rem;"><i class="fa-solid fa-list-check"></i> Routine Checklist</h3>
+                <div class="checklist-container" id="modal-checklist-container">
+                    <!-- Javascript generates specific day's routine steps -->
+                </div>
+
+                <div class="form-group" style="margin-top: 0.5rem;">
+                    <label for="modal-day-notes"><i class="fa-solid fa-note-sticky"></i> Notes for this Day</label>
+                    <textarea class="day-notes-textarea" id="modal-day-notes" placeholder="Log symptoms, skin textures, active items used, etc..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" id="modal-cancel-btn">Cancel</button>
+                <button class="action-btn" id="modal-save-btn"><i class="fa-solid fa-circle-check"></i> Save & Complete Day</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- START DATE SETUP MODAL -->
+    <div class="modal-backdrop" id="setup-modal">
+        <div class="modal-card" style="max-width: 450px;">
+            <div class="modal-header">
+                <h2 class="modal-title">Initialize Your Journey</h2>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 0.9rem; color: var(--text-secondary);">Set the start date of your 100-day face and skin upgrade protocol. The tracker will use this date to calculate which day you are currently on.</p>
+                
+                <div class="form-group">
+                    <label for="setup-start-date">Select Start Date</label>
+                    <input type="date" id="setup-start-date" class="form-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" id="setup-start-btn" style="width: 100%;"><i class="fa-solid fa-play"></i> Start 100-Day Clock</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATIONS -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check toast-icon" id="toast-icon"></i>
+        <span id="toast-message">Progress Saved!</span>
+    </div>
+
+    <script src="app.js?v=1.1"></script>
+</body>
+</html>
